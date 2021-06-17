@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BookShelf } from './service/BookShelf';
+import { Book } from './service/Book';
 
 function App(): JSX.Element {
     const [count, setCount] = useState(0);
+
+    const runIterator = () => {
+        const bookShelf = new BookShelf(10);
+
+        bookShelf.appendBook(new Book('아프니까 청춘이다.'));
+        bookShelf.appendBook(new Book('말빨이 살아야 한다.'));
+        bookShelf.appendBook(new Book('사피엔스'));
+        bookShelf.appendBook(new Book('오늘도 사랑이야'));
+
+        const iterator = bookShelf.iterator();
+
+        while (iterator.hasNext()) {
+            console.log(iterator.next());
+        }
+    };
 
     return (
         <div className="App">
@@ -27,6 +44,7 @@ function App(): JSX.Element {
                         Vite Docs
                     </a>
                 </p>
+                <button onClick={runIterator}>RunIterator</button>
             </header>
         </div>
     );
